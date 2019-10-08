@@ -1,0 +1,42 @@
+Given an encoded string, return its decoded string.
+
+"3[a]2[bc]", return "aaabcbc".
+
+class Solution(object):
+    def decodeString(self, s):
+        if s is None:
+            return s
+        # starting with the zero index 
+        i = 0
+        # keppin a stack to push and pop the values in 
+        # and out of it
+        arr =[]
+        while i < len(s):
+        # checking if the char at position i is digit till it encounters the "[" and then converting it 
+        # to number and appending it in the stack
+            if s[i].isdigit():
+                num = ""
+                while(s[i] != "["):
+                    num += s[i]
+                    i+=1
+                num =int(num)
+                arr.append(num)
+         # when "]" is encountered checking the last element of the string if it is "[" and till it is not just 
+         # getting the chars out and making a temp str and as soon as "[" is encountered exiting out of the loop 
+         # getting the "[" poped out of stack, getting number popped and mutiplying the string
+         # appending it to the stack
+            elif s[i] == "]":
+                t_str =""
+                while(arr[-1] !="["):
+                    t_str = arr.pop() + t_str
+                arr.pop()
+                t_str = arr.pop() * t_str
+                arr.append(t_str)
+                i+=1
+            else:
+            # anything else comes up just appending it in the stack
+                arr.append(s[i])
+                i+=1
+        # returning the entire string
+        return "".join(arr)
+        
