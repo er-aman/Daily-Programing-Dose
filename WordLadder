@@ -1,0 +1,34 @@
+import collections
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        if not beginWord or not endWord or endWord not in wordList or not wordList:
+            return 0 
+        
+        # createin a queue and keeping a distance count to keep the track 
+        # when i will reach the target that is the endWord
+        
+        queue, dis = collections.deque([beginWord]),1
+        while queue:
+            
+            # Everytime I am gonna iterate through the queue i am gonna increment the 
+            # distance
+            
+            dis+=1
+            
+            for _ in range(len(queue)):
+                # Extract the word out of the queue
+                word = queue.popleft()
+                
+                # iterating over the word length 
+                for i in range(len(word)):
+                    # generating the candidate words that it can have
+                    for char in string.ascii_lowercase:
+                        can_word = word[:i] + char + word[i+1:]
+                        # checking if candidate word is the final word or not 
+                        # and taking the appropiate action accordingly 
+                        if can_word == endWord:
+                            return dis
+                        if can_word in wordList:
+                            queue.append(can_word)
+                            wordList.remove(can_word)
+        return 0
