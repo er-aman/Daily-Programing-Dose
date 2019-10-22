@@ -1,0 +1,8 @@
+Remove dupicate from the string 
+
+# One way using the orderedDict which will take the O(n).
+
+from collections import OrderedDict
+class Solution:
+    def removeDuplicateLetters(self, s: str) -> str:
+        return "".join(OrderedDict.fromkeys(s))
