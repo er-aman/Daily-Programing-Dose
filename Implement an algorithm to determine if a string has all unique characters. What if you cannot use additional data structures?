@@ -1,1 +1,18 @@
+"""
+Take an array of length 128 and set it to false and now we iterate through the string char by char
+and will set the index of the char  true by getting the asicII 
+"""
 
+
+def is_unique(s):
+  if len(s) > 128:
+    return False
+  bool_arr = [False] * 128
+  for i in s:
+    index = ord(i)
+    if bool_arr[index]:
+      return False
+    bool_arr[index] = True
+  return True
+
+print(is_unique("Amanaz"))
