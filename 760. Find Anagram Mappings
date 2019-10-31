@@ -11,7 +11,7 @@ B = [50, 12, 32, 46, 28]
 We should return
 [1, 4, 3, 2, 0]
 
-
+Time complexity and the space complexity is o(n)
 ***********************************************************Solution*********************************************************************
 class Solution:
     def anagramMappings(self, A:List[int], B:List[int]) -> List[int]:
