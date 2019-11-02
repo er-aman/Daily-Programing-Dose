@@ -1,0 +1,58 @@
+Reverse a singly linked list.
+
+Example:
+
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+
+
+****************************************************************SOLUTION*******************************************************
+
+Recursively:- 
+# Defination of a ListNode
+# class ListNode:
+#     def __init__(self, val):
+#         self.val = val
+#         self.next = None
+
+
+class Solution:
+    def reverseList(self, head:ListNode):
+        """Here we call a recursive call to the helper function which 
+        will iterate through the nodes and will keep on reversing the 
+        pointer backwards"""
+        return self.reverseListUtil(head,None)
+    
+    def reverseListUtil(self,head,node):
+        if not head:
+            return node
+        temp = head.next
+        head.next = node
+        return self.reverseListUtil(temp, head)
+  
+Iteratively:-
+
+# Defination of a ListNode
+# class ListNode:
+#     def __init__(self, val):
+#         self.val = val
+#         self.next = None
+
+
+class Solution:
+    def reverseList(self, head:ListNode):
+        if not head:
+            return None 
+        #keep the global varibales to keep the track of current 
+        #and previous node
+        
+        curr = head
+        pre = None
+        
+        while curr != None:
+            next_n = curr.next
+            curr.next = pre
+            pre = curr
+            curr = next_n
+        
+        return pre
