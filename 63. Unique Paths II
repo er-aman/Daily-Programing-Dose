@@ -1,0 +1,72 @@
+A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+
+Now consider if some obstacles are added to the grids. How many unique paths would there be?
+
+An obstacle and empty space is marked as 1 and 0 respectively in the grid.
+
+Note: m and n will be at most 100
+
+Example 1:
+
+Input:
+[
+  [0,0,0],
+  [0,1,0],
+  [0,0,0]
+]
+Output: 2
+Explanation:
+There is one obstacle in the middle of the 3x3 grid above.
+There are two ways to reach the bottom-right corner:
+1. Right -> Right -> Down -> Down
+2. Down -> Down -> Right -> Right
+
+*********************************************************************SOLUTION************************************************************
+So to kepe the track of the obstracle we make another matrix of same dimension and for the first row and first col we insert 1 till there is 
+no obstruction and we exit as soon as we encounter 1 thus for this we have this part of code:-
+
+ m,n = map(len,(obstacleGrid, obstacleGrid[0]))
+        mat = [[0] * n for _ in range(m)]
+        
+        for i in range(m):
+            if obstacleGrid[i][0]:
+                break
+            mat[i][0] = 1
+        
+        for j in range(n):
+            if obstacleGrid[0][j]:
+                break
+            mat[0][j] = 1
+   
+  So now we start with first row and fisrt col and loop through  each index and if it is not an obstruction in our mat we 
+  update it with mat[k][l] = mat[k-1][l] + mat[k][l-1] and wherever there would be the obstruction in original grid there
+  our mat would have 0 value as it won't get updated and we will just return mat[m-1][n-1] for our unique paths.
+  
+  Complete code:-
+  
+  class Solution:
+    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+        m,n = map(len,(obstacleGrid, obstacleGrid[0]))
+        mat = [[0] * n for _ in range(m)]
+        
+        for i in range(m):
+            if obstacleGrid[i][0]:
+                break
+            mat[i][0] = 1
+        
+        for j in range(n):
+            if obstacleGrid[0][j]:
+                break
+            mat[0][j] = 1
+        
+        for k in range(1,m):
+            for l in range(1,n):
+                if not obstacleGrid[k][l]:
+                    mat[k][l] = mat[k-1][l] + mat[k][l-1]
+        print(mat)
+        return mat[m-1][n-1]
+  
+  
+  Time complexity for this O(mxn) and space complexity O(mxn) 
