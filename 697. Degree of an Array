@@ -1,0 +1,53 @@
+Given a non-empty array of non-negative integers nums, the degree of this array is defined as the maximum frequency of any one of its elements.
+
+Your task is to find the smallest possible length of a (contiguous) subarray of nums, that has the same degree as nums.
+
+Example 1:
+
+Input: [1, 2, 2, 3, 1]
+Output: 2
+Explanation: 
+The input array has a degree of 2 because both elements 1 and 2 appear twice.
+Of the subarrays that have the same degree:
+[1, 2, 2, 3, 1], [1, 2, 2, 3], [2, 2, 3, 1], [1, 2, 2], [2, 2, 3], [2, 2]
+The shortest length is 2. So return 2.
+
+Example 2:
+
+Input: [1,2,2,3,1,4,2]
+Output: 6
+
+Note:
+nums.length will be between 1 and 50,000.
+nums[i] will be an integer between 0 and 49,999.
+
+
+
+*******************************************************************SOLUTION*******************************************************
+class Solution:
+    def findShortestSubArray(self, nums: List[int]) -> int:
+        counter = collections.Counter(nums)
+        degree = max(counter.values())
+        deg_nums =[x for x,y in counter.items() if y== degree]
+        
+        #take the pointers
+        left =0
+        res= float('inf')
+        for i in deg_nums:
+            right= 0
+            temp = degree
+            while nums[left] != i:
+                left +=1
+            
+            right=left+1
+            temp-=1
+            
+            while temp!=0 and right<len(nums):
+                if nums[right]==i:
+                    temp-=1
+                right +=1
+            
+            res = min(res,right-left)
+        return res
+       
+      
