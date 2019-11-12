@@ -16,7 +16,7 @@ Only constant extra memory is allowed.
 You may not alter the values in the list's nodes, only nodes itself may be changed.
 
 *************************************************************SOLUTION**********************************************************
-
+Time complexity O(n) and space is o(1)
 
 # Definition for singly-linked list.
 # class ListNode:
