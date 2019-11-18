@@ -24,3 +24,40 @@ There will be at least one building. If it is not possible to build such house a
 
 
 ***************************************************SOLUTION********************************************************************
+
+class Solution:
+    def shortestDistance(self, grid: List[List[int]]) -> int:
+        
+        def bfs(grid,dist,empty_land,x,y):
+            dis,m,n= 0,len(grid), len(grid[0])
+            pre_level =[(x,y)]
+            visited =[[False for _ in range(n)] for _ in range(m)]
+            visited[x][y] = True
+            while pre_level:
+                dis+=1
+                cur_level=[]
+                for i,j in pre_level:
+                    for direction in [(-1,0),(1,0),(0,-1),(0,1)]:
+                        I, J = i+direction[0],j+direction[1]
+                        if 0<=I<m and 0<=J<n and grid[I][J]==0 and not visited[I][J]:
+                            visited[I][J]=True
+                            dist[I][J] += dis
+                            empty_land[I][J]+=1
+                            cur_level.append((I,J))
+                pre_level = cur_level
+                
+        count,m,n =0,len(grid), len(grid[0])
+        dist = [[0 for _ in range(n)] for _ in range(m)]
+        empty_land = [[0 for _ in range(n)] for _ in range(m)]
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j]==1:
+                    count+=1
+                    bfs(grid,dist,empty_land,i,j)
+
+        shortest = float('inf')
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if dist[i][j] < shortest and empty_land[i][j]==count:
+                    shortest = dist[i][j]
+        return shortest if shortest !=float("inf") else -1
