@@ -1,0 +1,23 @@
+Given an unsorted array nums, reorder it in-place such that nums[0] <= nums[1] >= nums[2] <= nums[3]....
+
+Example:
+
+Input: nums = [3,5,2,1,6,4]
+Output: One possible answer is [3,5,1,6,2,4]
+
+****************************************************************SOLUTION*******************************************************
+
+Time Complexity:O(nlogn)
+Space Complexity:O(1)
+
+class Solution:
+    def wiggleSort(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        nums.sort()
+        i =1
+        while i< len(nums)-1:
+            nums[i],nums[i+1]=nums[i+1], nums[i]
+            i+=2
+                
