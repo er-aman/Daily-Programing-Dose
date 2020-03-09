@@ -1,0 +1,40 @@
+In a given grid, each cell can have one of three values:
+
+the value 0 representing an empty cell;
+the value 1 representing a fresh orange;
+the value 2 representing a rotten orange.
+Every minute, any fresh orange that is adjacent (4-directionally) to a rotten orange becomes rotten.
+
+Return the minimum number of minutes that must elapse until no cell has a fresh orange.  If this is impossible, return -1 instead.
+
+
+Time and space complexity is O(n*m)
+
+
+
+import collections
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        directions = [(0,-1),(0,1),(-1,0),(1,0)]
+        queue = collections.deque()
+        count = 0
+        
+        for r,row in enumerate(grid):
+            for c,val in enumerate(row):
+                if val ==2:
+                    queue.append((r,c,0))
+                elif val ==1:
+                    count +=1
+        
+        result =0
+        while queue:
+            r,c,result = queue.popleft()
+            for d in directions:
+                new_row,new_col = r+d[0],c+d[1]
+                if not(0<=new_row<len(grid) and 0<=new_col<len(grid[r])):
+                    continue
+                if grid[new_row][new_col]==1:
+                    count-=1
+                    grid[new_row][new_col]=2
+                    queue.append((new_row,new_col,result+1))
+        return result if count==0 else -1
