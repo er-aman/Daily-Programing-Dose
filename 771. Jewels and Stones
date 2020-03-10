@@ -1,0 +1,50 @@
+You're given strings J representing the types of stones that are jewels, and S representing the stones you have.  Each character in S is a type of stone you have.  You want to know how many of the stones you have are also jewels.
+
+The letters in J are guaranteed distinct, and all characters in J and S are letters. Letters are case sensitive, so "a" is considered a different type of stone from "A".
+
+Example 1:
+
+Input: J = "aA", S = "aAAbbbb"
+Output: 3
+Example 2:
+
+Input: J = "z", S = "ZZ"
+Output: 0
+Note:
+
+S and J will consist of letters and have length at most 50.
+The characters in J are distinct.
+
+Time Complexity:
+O(n)
+Space O(1)
+
+Solution :
+
+class Solution:
+    def numJewelsInStones(self, J: str, S: str) -> int:
+        if not J or not S:
+            return 0 
+        j_hash= {}
+        s_hash ={}
+        x=0
+        for i in J:
+            x=ord(i)
+            if x not in j_hash.keys():
+                j_hash[x]=1
+            else:
+                j_hash[x]+=1
+        
+        for i in S:
+            x=ord(i)
+            if x not in s_hash.keys():
+                s_hash[x]=1
+            else:
+                s_hash[x]+=1
+        res =0
+        for i in s_hash.keys():
+            if i in j_hash.keys():
+                res+=s_hash[i]
+        
+        return res 
+              
