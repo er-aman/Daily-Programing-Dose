@@ -6,9 +6,41 @@ Difficulty Level: ( Easy | Medium )
 
 
 Must-Do
-LeetCode88. Merge Sorted Array
+LeetCode88. Merge Sorted Array:--
+        i=m-1
+        k= len(nums1)-1
+        j=n-1
+        while i>=0 and j>=0:
+          if nums1[i]<nums2[j]:
+            nums1[k] = nums2[j]
+            j-=1
+            k-=1
+          else:
+            nums1[k]=nums1[i]
+            i-=1
+            k-=1
+       nums1[:j+1] = nums2[:j+1]
 
 LeetCode186. Reverse Words in a String II
+             
+             1st i need to define a reverse function which takes list, left and right pointers :- 
+             2) revesrse the entire list using the function
+             3) for loop over the list and check for empty space element and run the below function:
+             self.reverse(s,0,len(s)-1) ===> reverses the list
+             previous =0 
+             for i in range(len(s)):
+               if s[i]==" ":
+                self.reverse(s,previous,i-1)
+                previous=i+1
+               elif s[i] == len(s)-1:
+                self.reverse(s,previous,i)
+             def reverse(self, s,left, right):
+              while left<right:
+                 s[left], s[right] = s[right],s[left]
+                 left+=1
+                 right-=1
+            
+              
 
 LeetCode1. Two Sum
 
