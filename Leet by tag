@@ -43,14 +43,77 @@ LeetCode186. Reverse Words in a String II
               
 
 LeetCode1. Two Sum
+import collections
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        my_dict = {k:v for v,k in enumerate(nums)}
+        for i in range(len(nums)):
+            temp_res = target - nums[i]
+            if temp_res in my_dict and my_dict[temp_res]!=i:
+                return [i,my_dict[temp_res]]
 
 LeetCode143. Reorder List
 
-LeetCode92. Reverse Linked List II
+class Solution:
+    def reorderList(self, head: ListNode) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+        if not head:
+            return
+        fast=slow=head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        
+        previous,cur = None, slow 
+        while cur:
+            cur.next,previous,cur = previous,cur,cur.next
+        
+        first,second = head,previous
+        while second.next:
+            first.next,first = second,first.next
+            second.next,second = first,second.next
 
+LeetCode92. Reverse Linked List II
+ dummy=ListNode(0)
+        dummy.next = head
+        
+        previous,cur= dummy,head
+        for _ in range(m-1):
+            cur= cur.next
+            previous=previous.next
+        for _ in range(n-m):
+            temp=cur.next
+            cur.next=temp.next
+            temp.next=previous.next
+            previous.next= temp
+        return dummy.next
 LeetCode56. Merge Intervals
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        sorted(intervals)
+        res=[]
+        for i in intervals:
+            if not res or res[-1][1]<i[0]:
+                res.append(i)
+            else:
+                res[-1][1]=max(res[-1][1],i[1])
+        return res
 
 LeetCode20. Valid Parentheses
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack=[]
+        my_dict = {"]":"[","}":"{",")":"("}
+        for i in s:
+            if i in my_dict:
+                top_el = stack.pop() if stack else "#"
+                if top_el != my_dict[i]:
+                    return False
+            else:
+                stack.append(i)
+        return not stack
 
 LeetCode75. Sort Colors
 
