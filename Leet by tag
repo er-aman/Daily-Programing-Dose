@@ -116,18 +116,107 @@ class Solution:
         return not stack
 
 LeetCode75. Sort Colors
-
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        red,white,blue = 0,0,len(nums)-1
+        while white<blue:
+            if nums[white]==0:
+                nums[red],nums[white]= nums[white],nums[red]
+                red+=1
+                white+=1
+            elif nums[white]==1:
+                white+=1
+            else:
+                nums[white],nums[blue]=nums[blue],nums[white]
+                blue-=1
+                white+=1
 LeetCode155. Min Stack
 
+
 LeetCode277. Find the Celebrity
+class Solution:
+    def findCelebrity(self, n: int):
+        candidate=0
+        for i in range(1,n):
+            if knows(candidate,i):
+                candidate=i
+        for i in range(n):
+            candidate_knows_i = knows(candidate,i)
+            i_knows_cand= knows(i,candidate)
+            if i!=candidate and (candidate_knows_i or not i_knows_cand):
+                return -1
+        return candidate
 
 LeetCode281. Zigzag Iterator
+class ZigzagIterator:
+    def __init__(self, v1: List[int], v2: List[int]):
+        self.queue = [_ for _ in (v1,v2) if _]
 
-57. insert interval
+    def next(self) -> int:
+        v=self.queue.pop(0)
+        res=v.pop(0)
+        if v:
+            self.queue.append(v)
+        return res
+            
+    def hasNext(self) -> bool:
+        if self.queue:
+            return True
+        else:
+            return False
 
+57. insert interva
+class Solution:
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        if not intervals and newInterval:
+            return [newInterval]
+        i=0
+        res=[]
+        while i<len(intervals):
+            if intervals[i][1]>= newInterval[0] and intervals[i][1]<= newInterval[1] :
+                intervals[i][1] = max(intervals[i][1],newInterval[1])
+                intervals[i][0] = min(intervals[i][0],newInterval[0])
+                res.append([intervals[i][0],intervals[i][1]])
+                newInterval=[float('inf'),float('inf')]
+            else:
+                res.append(intervals[i])
+            i+=1
+        if newInterval!=[float('inf'),float('inf')]:
+            res.append(newInterval)
+        res.sort()
+        final_res=[res[0]]
+        j=1
+        while j<len(res):
+            if final_res[-1][1]>=res[j][0]:
+                final_res[-1][1]=max(final_res[-1][1],res[j][1])
+            else:
+                final_res.append(res[j])
+            j+=1
+        return final_res
 71. Simplify Path
 
 15. 3Sum
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        res = set()
+        i =0
+        nums.sort()
+        while i<len(nums)-2:
+            left,right=i+1,len(nums)-1
+            while left<right:
+                temp = nums[left]+nums[right]+nums[i]
+                if temp>0:
+                    right-=1
+                elif temp<0:
+                    left+=1
+                else:
+                    res.add((nums[left],nums[right],nums[i]))
+                    left+=1
+            i+=1
+        return list(res)
 
 
 
