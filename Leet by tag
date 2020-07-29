@@ -362,6 +362,24 @@ LeetCode154. Find Minimum in Rotated Sorted Array II
 
 LeetCode144. Binary Tree Preorder Traversal
 
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        def dfs(root,res):
+            if root:
+                res.append(root.val)
+                dfs(root.left,res)
+                dfs(root.right,res)
+                
+        res=[]
+        dfs(root,res)
+        return res
+
 104. Maximum Depth of Binary Tree
 
 111. Minimum Depth of Binary Tree
