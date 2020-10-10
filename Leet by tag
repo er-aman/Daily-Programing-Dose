@@ -227,6 +227,23 @@ LeetCode283. Move Zeros
 
 LeetCode242. Valid Anagram
 
+import collections
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        s_res= collections.Counter(s)
+        t_res = collections.Counter(t)
+        
+        key_set = set()
+        for k in s_res.keys():
+            key_set.add(k)
+        for k in t_res.keys():
+            key_set.add(k)
+        for key in key_set:
+            if s_res[key] != t_res[key]:
+                return False
+        
+        return True
+
 16. 3sum closest
 
 246. Strobogrammatic Number
