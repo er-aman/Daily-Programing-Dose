@@ -241,6 +241,19 @@ LeetCode242. Valid Anagram
 
 48 rotate image
 
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        for i in range(len(matrix)):
+            for j in range(i,len(matrix)):
+                matrix[j][i], matrix[i][j]= matrix[i][j], matrix[j][i]
+                
+        
+        for row in matrix:
+            row=row.reverse()
+
 225 implement stack using queues
 
 
