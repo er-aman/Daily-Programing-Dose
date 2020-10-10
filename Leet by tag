@@ -136,6 +136,39 @@ class Solution:
 LeetCode155. Min Stack
 
 
+class MinStack:
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.stack=[]
+        self.minStack=[]
+
+    def push(self, x: int) -> None:
+        self.stack.append(x)
+        if not self.minStack or self.minStack[-1]>= x:
+            self.minStack.append(x)
+    def pop(self) -> None:
+        temp= self.stack.pop()
+        if temp == self.minStack[-1]:
+            self.minStack.pop()
+
+    def top(self) -> int:
+        return self.stack[-1]
+
+    def getMin(self) -> int:
+        return self.minStack[-1]
+
+
+# Your MinStack object will be instantiated and called as such:
+# obj = MinStack()
+# obj.push(x)
+# obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.getMin()
+
+
 LeetCode277. Find the Celebrity
 class Solution:
     def findCelebrity(self, n: int):
@@ -246,15 +279,75 @@ class Solution:
 
 16. 3sum closest
 
+class Solution:
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        closest = nums[0] + nums[1] + nums[2]
+        nums.sort()
+        
+        for i in range(len(nums)-2):
+            l= i+1
+            
+            r= len(nums)-1
+            
+            while l<r:
+                total = nums[i]+ nums[l] + nums[r]
+                
+                if abs(target-total) < abs(target - closest):
+                    closest = total
+                
+                if total< target:
+                    l+=1
+                
+                elif total > target:
+                    r -=1
+                else:
+                    return closest
+            
+        return closest
+
 246. Strobogrammatic Number
 
 82. Remove Duplicates from Sorted list II
 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        dummy = ListNode(-1)
+        dummy.next = head
+        
+        l,r= dummy, dummy.next 
+        
+        while r:
+            if r.next and r.val == r.next.val:
+                val_remember = r.val
+                
+                while r and r.val==val_remember:
+                    r = r.next
+                
+                l.next =r
+            else:
+                l, r = r, r.next
+        
+        return dummy.next
+        
 380. Insert delete getrandom O(1)
 
 11 container with most water
 
 189 rotate array
+
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        temp_arr = nums[len(nums)-k::] + nums[0:((len(nums)-k))]
+        for i in range(len(temp_arr)):
+            nums[i] = temp_arr[i]
 
 48 rotate image
 
@@ -273,7 +366,62 @@ class Solution:
 
 225 implement stack using queues
 
+import collections
 
+class Queue:
+    def __init__(self):
+        self.q_ = collections.deque()
+    def push(self,x):
+        self.q_.append(x)
+    def pop(self):
+        return self.q_.popleft()
+    def top(self):
+        return self.q_[0]
+    def size(self):
+        return len(self.q_)
+    def empty(self):
+        return len(self.q_)==0 
+
+class MyStack:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.stack = Queue()
+        
+    def push(self, x: int) -> None:
+        """
+        Push element x onto stack.
+        """
+        self.stack.push(x)
+        for _ in range(self.stack.size() -1):
+            self.stack.push(self.stack.pop())
+    def pop(self) -> int:
+        """
+        Removes the element on top of the stack and returns that element.
+        """
+        return self.stack.pop()
+
+    def top(self) -> int:
+        """
+        Get the top element.
+        """
+        return self.stack.top()
+
+    def empty(self) -> bool:
+        """
+        Returns whether the stack is empty.
+        """
+        return self.stack.size()==0
+
+
+# Your MyStack object will be instantiated and called as such:
+# obj = MyStack()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.empty()
 
 
 
