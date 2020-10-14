@@ -575,6 +575,22 @@ Difficulty Level: ( Easy | Medium )
 Must-Do
 206. Reverse Linked List
 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseUtil(self,head,node):
+        if not head:
+            return node
+        temp = head.next
+        head.next = node
+        return self.reverseUtil(temp,head)
+    def reverseList(self, head: ListNode) -> ListNode:
+        return self.reverseUtil(head,None)
+        
+
 LeetCode278. First Bad Version
 
 # The isBadVersion API is already defined for you.
@@ -709,7 +725,8 @@ LeetCode98. Validate Binary Search Tree
                 return False
         return True
 
-LeetCode236. Lowest Common Ancestor of a Binary Tree
+LeetCode
+. Lowest Common Ancestor of a Binary Tree
 
 LeetCode153. Find Minimum in Rotated Sorted Array
 
@@ -806,7 +823,40 @@ class Solution:
         
 101. Symmetric Tree
 
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def search(self,p,q):
+        if not p and not q:
+            return True
+        if not p or not q or p.val != q.val:
+            return False
+        return self.search(p.left,q.right) and self.search(p.right, q.left)
+    def isSymmetric(self, root: TreeNode) -> bool:
+        return self.search(root.left, root.right) if root else True
+
 110. Balanced Binary Tree
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def lookup(self,root):
+        if not root:
+            return 0 
+        left_height, right_height = self.lookup(root.left),self.lookup(root.right)
+        if left_height<0 or right_height<0 or abs(left_height-right_height)>1:
+            return -1
+        return max(left_height,right_height)+1
+    def isBalanced(self, root: TreeNode) -> bool:
+        return self.lookup(root)>=0
 
 
 
@@ -861,11 +911,53 @@ class Solution:
 
 LeetCode102. Binary Tree Level Order Traversal
 
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        res=[]
+        
+        queue = [root]
+        
+        while queue:
+            temp_list =[]
+            for _ in range(len(queue)):
+                cur_node = queue.pop(0)
+                temp_list.append(cur_node.val)
+                if cur_node.left:
+                    queue.append(cur_node.left)
+                if cur_node.right:
+                    queue.append(cur_node.right)
+            res.append(temp_list)
+        return res
+
 LeetCode81. Search in Rotated Sorted Array II
 
 129. Sum Root to Leaf Numbers
 
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:        
+    def sumNumbers(self, root: TreeNode) -> int:
+        
+        if not root:
+            return 0 
+        
+        if not root.left and not root.right:
+            return int(root.val)
+        
+        if root.left: root.left.val = 10*(root.val) + root.left.val
+        if root.right: root.right.val = 10*(root.val) + root.right.val
+        
+        return self.sumNumbers(root.left) + self.sumNumbers(root.right)
 
 
 
