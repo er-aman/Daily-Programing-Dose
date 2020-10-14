@@ -674,7 +674,25 @@ class Solution:
 
 LeetCode156. Binary Tree Upside Down
 
-
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def upsideDownBinaryTree(self, root: TreeNode) -> TreeNode:
+        if not root or (not root.left and not root.right):
+            return root 
+        lroot = self.upsideDownBinaryTree(root.left)
+        
+        temp = lroot
+        while temp.right:
+            temp=temp.right
+        
+        temp.right = TreeNode(root.val)
+        temp.left= root.right
+        return lroot
 
 LeetCode98. Validate Binary Search Tree
 
