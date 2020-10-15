@@ -769,7 +769,19 @@ class Solution:
 
 LeetCode154. Find Minimum in Rotated Sorted Array II
 
-
+def findMin(nums):
+    l,r = 0, len(nums)-1
+    # [2,3,4,5,6,7] => [5,6,7,2,2,3,3,4,4]
+                              
+    while l<r:
+        mid = (l+r)//2
+        if nums[mid]>nums[r]:
+            l= mid +1
+        elif nums[mid]<nums[r]:
+            r= mid
+        else:
+            r-=1
+    return nums[l]
 
 LeetCode144. Binary Tree Preorder Traversal
 
@@ -905,6 +917,34 @@ Optional
 LeetCode235. Lowest Common Ancestor of a Binary Search Tree
 
 LeetCode33. Search in Rotated Sorted Array
+
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        if not nums:
+            return -1
+        
+        left,right = 0, len(nums)-1
+        while left+1<right:
+            mid = left +(right-left)//2
+            if nums[mid]==target:
+                return mid
+            elif nums[left]<= nums[mid]:
+                if nums[left]<=target and target<nums[mid]:
+                    right=mid
+                else:
+                    left=mid
+            else:
+                if target<=nums[right] and target>nums[mid]:
+                    left=mid
+                else:
+                    right=mid
+                    
+        if nums[left]==target:
+            return left
+        if nums[right]==target:
+            return right
+        return -1
+            
 
 LeetCode94. Binary Tree Inorder Traversal
 
