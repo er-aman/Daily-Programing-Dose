@@ -725,12 +725,51 @@ LeetCode98. Validate Binary Search Tree
                 return False
         return True
 
-LeetCode
-. Lowest Common Ancestor of a Binary Tree
+
+
+Lowest Common Ancestor of a Binary Tree
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if p == root or q == root:
+            return root
+        
+        
+        left=right=None 
+        if root.left:
+            left = self.lowestCommonAncestor(root.left,p,q)
+        if root.right:
+            right = self.lowestCommonAncestor(root.right,p,q)
+        
+        if left and right:
+            return root
+    
+        
+        return left or right
 
 LeetCode153. Find Minimum in Rotated Sorted Array
 
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        l,r = 0, len(nums)-1
+        while l<r and nums[l]>=nums[r]:
+            mid = (l+r)//2
+            if nums[mid]<nums[l]:
+                r=mid
+            else:
+                l = mid +1
+        return nums[l]
+
 LeetCode154. Find Minimum in Rotated Sorted Array II
+
+
 
 LeetCode144. Binary Tree Preorder Traversal
 
@@ -1040,31 +1079,59 @@ Difficulty Level: ( Easy | Medium )
 Must-Do
 75. Sort Colors
 
+
+
 LeetCode133. Clone Graph
+
+
 
 LeetCode207. Course Schedule
 
+
+
 LeetCode210. Course Schedule II
+
+
 
 LeetCode490. The Maze
 
+
+
 LeetCode505. The Maze II
+
+
 
 LeetCode46. Permutations
 
+
+
 LeetCode47. Permutations II
+
+
 
 LeetCode200. Number of Islands
 
+
+
 LeetCode305. Number of Islands II
+
+
 
 692. Top K Frequent Words
 
+
+
 LeetCode286. Walls and Gates
+
+
 
 LC 77 Combinations
 
+
+
 LC 78 Subsets
+
+
 
 52. N-Queens II
 
