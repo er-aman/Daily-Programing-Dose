@@ -1288,11 +1288,36 @@ class Solution:
 
 LeetCode240. Search in 2D Matrix II
 
+
 LeetCode127. Word Ladder
 
 LeetCode126. Word Ladder II
 
 LeetCode286. Walls and Gates
+
+import collections
+class Solution:
+    def wallsAndGates(self, rooms: List[List[int]]) -> None:
+        """
+        Do not return anything, modify rooms in-place instead.
+        """
+        if not rooms:
+            return []
+        rows = len(rooms)
+        cols = len(rooms[0])
+        queue = collections.deque()
+        for i in range(rows):
+            for j in range(cols):
+                if rooms[i][j] ==0:
+                    queue.append((i,j))
+        
+        while queue:
+            x,y = queue.popleft()
+            
+            for i,j in [(1,0),(0,-1),(0,1),(-1,0)]:
+                if 0<=x+i<rows and 0<=y+j<cols and rooms[x+i][y+j]>rooms[x][y]:
+                    rooms[x+i][y+j] = rooms[x][y] + 1
+                    queue.append((x+i,y+j))
 
 LeetCode305. Number of Island II
 
