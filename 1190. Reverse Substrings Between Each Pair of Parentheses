@@ -1,0 +1,14 @@
+class Solution:
+    def reverseParentheses(self, s: str) -> str:
+        myStack =['']
+        
+        for i in s:
+            if i =="(":
+                myStack.append('')
+            elif i==")":
+                add = myStack.pop()[::-1]
+                myStack[-1]+=add
+            else:
+                myStack[-1]+=i
+        
+        return myStack[-1]
