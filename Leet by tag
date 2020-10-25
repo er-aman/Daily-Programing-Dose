@@ -1305,6 +1305,20 @@ LeetCode787. Cheapest Flights Within K Stops
 
 347. Top K Frequent Elements
 
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        lookup = collections.Counter(nums)
+        keys = list(lookup.keys())
+        values = list(lookup.values())
+        res =[]
+        for _ in range(k):
+            max_val = max(values)
+            ind_max = values.index(max_val)
+            res.append(keys[ind_max])
+            keys.pop(ind_max)
+            values.pop(ind_max)
+        return res
+
 295. Find Median from Data Stream
 
 261. Graph Valid Tree
