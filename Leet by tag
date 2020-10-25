@@ -1133,6 +1133,47 @@ LeetCode298. Binary Tree Longest Consecutive Sequence
 
 LeetCode99. Recover Binary Search Tree
 
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def recoverTree(self, root: TreeNode) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        def inorder(root):
+            return inorder(root.left) + [root.val]+ inorder(root.right) if root else []
+        
+        def getSwap(nums):
+            n=len(nums)
+            x=y=-1
+            for i in range(n-1):
+                if nums[i+1]<nums[i]:
+                    y= nums[i+1]
+                    if x==-1:
+                        x=nums[i]
+                    else:
+                        break
+            return x,y
+        
+        def recover(r:TreeNode,count):
+            if r:
+                if r.val ==x or r.val ==y:
+                    r.val=y if r.val==x else x
+                    count-=1
+                    if count ==0:
+                        return 
+                recover(r.left,count)
+                recover(r.right,count)
+            
+        nums =inorder(root)
+        x,y = getSwap(nums)
+        recover(root,2)
+        
+
 QuickSort implementation
 
 LeetCode384. Shuffle an Array
