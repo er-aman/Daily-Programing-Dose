@@ -1366,6 +1366,10 @@ class Solution:
 
 295. Find Median from Data Stream
 
+class solution:
+        def __init__(self):
+                self.small 
+
 261. Graph Valid Tree
 
 253. Meeting Room II
