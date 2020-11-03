@@ -29,23 +29,36 @@ cache.get(4);       // returns 4
 # For implementing this i would use the orderedQueue which will keep the track of which
 # key was inserted when and we will then get that thing done
 
-class LRUCache:
+import collections
+import unittest
+class LRU:
+  
+  def __init__(self,capacity):
+    self.capacity= capacity
+    self.head=collections.defaultdict(int)
+    
+  def get(self,key):
+    if key not in self.head:
+      return -1
+    self.head[key] = self.head.pop(key)
+    return self.head[key]
+  def put(self,key,value):
+    self.head.pop(key,None)
+    if len(self.head)> self.capacity:
+      self.head.popitem(last=False)
+    self.head[key]=value
+  
 
-    def __init__(self, capacity: int):
-        self.capacity = capacity
-        self.queue = collections.OrderedDict()
-    def get(self, key: int) -> int:
-        if key not in self.queue:
-            return -1 
-        self.queue[key] = self.queue.pop(key)
-        return self.queue[key]
-    def put(self, key: int, value: int) -> None:
-        self.queue.pop(key,None)
-        self.queue[key]= value
-        
-        if len(self.queue) > self.capacity:
-            self.queue.popitem(last = False)
-# Your LRUCache object will be instantiated and called as such:
-# obj = LRUCache(capacity)
-# param_1 = obj.get(key)
-# obj.put(key,value)
+class Test(unittest.TestCase):
+  def test_get_key(self):
+    lru =LRU(4)
+    actual = lru.get("1")
+    expected = -1
+    self.assertEqual(actual,expected)
+  def test_get_key2(self):
+    lru= LRU(4)
+    lru.put("1","Aman")
+    actual = lru.get("1")
+    expected = "Aman"
+    self.assertEqual(actual,expected)
+unittest.main(verbosity=2)
