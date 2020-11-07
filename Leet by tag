@@ -1561,6 +1561,11 @@ LeetCode352. Data Stream as Disjoint Intervals
 
 LeetCode973. Kth Closest Points
 
+class Solution:
+    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
+        points.sort(key= lambda p: p[0]**2 + p[1]**2)
+        return points[:K]
+    
 LeetCode684. Redundant Connection
 
 LeetCode802. Find Eventual Safe States
