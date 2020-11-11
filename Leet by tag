@@ -2153,4 +2153,4 @@ class Solution:
         idx=0
         return helper()
 
-
+Time and space complexity is O(n)
