@@ -1932,3 +1932,28 @@ class Solution:
         
    
    
+733. Flood Fill 
+
+import collections
+class Solution:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
+        if image[sr][sc]== newColor:
+            return image
+        queue = collections.deque([(sr,sc)])
+        color = image[sr][sc]
+        visited={(sr,sc)}
+        while queue:
+            
+            cur_r, cur_c = queue.popleft()
+            image[cur_r][cur_c]=newColor
+            for i,j in [(1,0),(-1,0),(0,-1),(0,1)]:
+                new_r = cur_r+i 
+                new_c = cur_c+j 
+                
+                if 0<= new_r<len(image) and 0 <= new_c<len(image[0]) and image[new_r][new_c]==color:
+                    if (new_r,new_c) not in visited:
+                        visited.add((new_r,new_c))
+                        queue.append((new_r,new_c))
+        
+        return image
+                    
