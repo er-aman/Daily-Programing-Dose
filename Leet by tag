@@ -1957,3 +1957,29 @@ class Solution:
         
         return image
                     
+
+1197. Minimum Knight Moves
+
+import collections
+class Solution:
+    def minKnightMoves(self, x: int, y: int) -> int:
+        queue = collections.deque([])
+        queue.append((0,0,0))
+        visited = {(0,0)}
+        while queue:
+            i,j,steps = queue.popleft()
+            if i ==x and j==y:
+                return steps
+            
+            directions = [(-2,-1),(-2,1),(2,1),(2,-1),(-1,2),(-1,-2),(1,2),(1,-2)]
+            for m,n in directions:
+                new_row = i+m
+                new_col = j+n
+                if (new_row, new_col) not in visited:
+                    visited.add((new_row, new_col))
+                    queue.append((new_row, new_col, steps+1))
+        return -1
+        
+        
+   
+
