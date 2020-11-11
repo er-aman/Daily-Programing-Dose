@@ -2069,3 +2069,59 @@ class Solution:
         if root.left:
             self.bstToGst(root.left)
         return root
+
+
+535. Encode and Decode TinyURL
+
+from hashlib import sha256
+import unittest
+class TinyUrl:
+  def __init__(self):
+    self.lookup ={}
+  
+  def encode(self,long_url):
+    key_set = sha256(long_url.encode()).hexdigest()[:6]
+    tiny_url = "http://tinyurl.com/"+key_set
+    self.lookup[tiny_url]=long_url
+    return tiny_url
+  
+  
+  def decode(self,tiny_url):
+    return self.lookup[tiny_url]
+  
+
+obj = TinyUrl()
+print(obj.encode("https://leetcode.com/problems/design-tinyurl"))
+print(obj.decode("http://tinyurl.com/f86ef1"))
+
+
+
+
+797. All Paths From Source to Target
+
+
+import collections
+def allPathsFromSourceToTarget(graph):
+  n= len(graph)
+  target = n-1
+  result =[]
+  
+  def dfs(cur_node,path):
+    #base case
+    if cur_node == target:
+      result.append(list(path))
+      return
+    
+    for neighbour in graph[cur_node]:
+      path.append(neighbour)
+      dfs(neighbour,path)
+      path.pop()
+  
+  path= collections.deque([0])
+  dfs(0,path)
+  return result
+
+print(allPathsFromSourceToTarget([[1,2],[3],[3],[]]))
+
+Time complexity and space complexity is 2**N *N where 
+N is no. of nodes in the graph
