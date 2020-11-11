@@ -1893,3 +1893,42 @@ LC97. Interleaving String
 LC135. Candy
 
 LC329. Longest Increasing Path in Matrix
+
+
+
+
+
+
+
+Amazon
+~~~~~~~~~~
+
+632. Smallest Range Covering Elements from K Lists
+
+Time Complexity is O(nlogm)
+
+class Solution:
+    def smallestRange(self, nums: List[List[int]]) -> List[int]:
+        heap=[]
+        rangeStart=0
+        range_end = float('inf')
+        current_max = float('-inf')
+        
+        for i in range(len(nums)):
+            heapq.heappush(heap,(nums[i][0],0,i))
+            current_max = max(current_max, nums[i][0])
+        
+        while len(heap)==len(nums):
+            num,idx,row = heapq.heappop(heap)
+            if range_end - rangeStart >  current_max - num:
+                rangeStart = num 
+                range_end = current_max
+            
+            if idx+1< len(nums[row]):
+                heapq.heappush(heap,(nums[row][idx+1],idx+1,row))
+                current_max = max(current_max,nums[row][idx+1])
+                
+        return [rangeStart,range_end]
+        
+   
+   
