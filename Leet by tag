@@ -2125,3 +2125,32 @@ print(allPathsFromSourceToTarget([[1,2],[3],[3],[]]))
 
 Time complexity and space complexity is 2**N *N where 
 N is no. of nodes in the graph
+
+
+1008. Construct Binary Search Tree from Preorder Traversal
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def bstFromPreorder(self, preorder: List[int]) -> TreeNode:
+        def helper(lower=float('-inf'),high=float('inf')):
+            nonlocal idx
+            if idx == len(preorder):
+                return None
+            val = preorder[idx]
+            if val<lower or val> high:
+                return None
+            root = TreeNode(val)
+            idx+=1
+            root.left = helper(lower,val)
+            root.right = helper(val,high)
+
+            return root
+        idx=0
+        return helper()
+
+
