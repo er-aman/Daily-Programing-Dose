@@ -2191,3 +2191,4 @@ class Solution:
             root.right = self.insertIntoBST(root.right,val)
         
         return root
+Time complexity is O(H) => O(log n) average case and O(N) worst case
