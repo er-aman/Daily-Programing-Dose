@@ -2338,5 +2338,71 @@ class Solution:
                 if i-lookup[total]>=2:
                     return True
         return False 
-                
-  
+
+179. Largest Number
+
+from functools import cmp_to_key
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        def comp_function(x,y):
+            if x+y>y+x:
+                return 1
+            elif x+y == y+x:
+                return 0
+            else:
+                return -1
+            
+        
+        nums=[str(i) for i in nums]
+        nums.sort(key=cmp_to_key(comp_function), reverse=True)
+        
+        return ''.join(nums).lstrip('0') or '0'
+
+
+
+402. Remove K Digits
+
+class Solution:
+    def removeKdigits(self, num: str, k: int) -> str:
+        stack=[]
+        for i in num:
+            while k>0 and len(stack)>0 and stack[-1]>i:
+                k-=1
+                stack.pop()
+            
+            stack.append(i)
+        if k>0:
+            stack=stack[:-k]
+        
+        return "".join(stack).lstrip('0') or "0"
+        
+        
+130. Surrounded Regions
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        if not board:
+            return 
+        m,n=len(board),len(board[0])
+        def dfs(i,j):
+            directions=[(-1,0),(0,1),(1,0),(0,-1)]
+            if 0<=i<len(board) and 0<=j<len(board[0]) and board[i][j]=='O':
+                board[i][j]='N'
+                for m,n in directions:
+                    dfs(i+m,j+n)
+        
+        for i in range(m):
+            if board[i][0]=="O": dfs(i,0)
+            if board[i][n-1]=="O": dfs(i,n-1)
+        
+        for i in range(n):
+            if board[0][i]=="O": dfs(0,i)
+            if board[m-1][i]=="O": dfs(m-1,i)
+        
+        for i in range(m):
+            for j in range(n):
+                if board[i][j]!='N': board[i][j]='X'
+                else:
+                    board[i][j]='O'
