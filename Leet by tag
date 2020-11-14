@@ -1989,6 +1989,16 @@ class Solution:
         for num in nums:
             res+=[i+[num] for i in res]
         return res
+        
+   subset for chars:
+   def getSubStrings(string):
+          str_list=[i for i in string]
+          res=['']
+          for ch in str_list:
+            res+=[i+ch for i in res]
+          return sorted(res[1:])
+
+print(getSubStrings('abc'))
     
    90. Subsets II
    
@@ -2310,3 +2320,23 @@ class Solution:
         return "".join(stack).lstrip("0") or "0"
   
 
+523. Continuous Subarray Sum
+
+class Solution:
+    def checkSubarraySum(self, nums: List[int], k: int) -> bool:
+        lookup={0:-1}
+        total=0
+        for i in range(len(nums)):
+            if k!=0:
+                total = (total + nums[i])%k
+            else:
+                total+= nums[i]
+            
+            if total not in lookup:
+                lookup[total]=i
+            else:
+                if i-lookup[total]>=2:
+                    return True
+        return False 
+                
+  
