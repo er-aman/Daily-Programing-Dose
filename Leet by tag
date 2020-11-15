@@ -2639,3 +2639,27 @@ class Solution:
    Time is O(mn) space is O(1)
    
    
+1135. Connecting Cities With Minimum Cost
+
+import heapq
+class Solution:
+    def minimumCost(self, N: int, connections: List[List[int]]) -> int:
+        lookup = collections.defaultdict(list)
+        for i,j,k in connections:
+            lookup[i].append((k,j))
+            lookup[j].append((k,i))
+        visited_set =set()
+        total_cost=0
+        queue = [(0,N)]
+        while queue and len(visited_set)<N:
+            cur_cost,cur_city = heapq.heappop(queue)
+            if cur_city not in visited_set:
+                visited_set.add(cur_city)
+                total_cost+=cur_cost
+                for next_city_cost, next_city in lookup[cur_city]:
+                    heapq.heappush(queue,(next_city_cost, next_city))
+        
+        return total_cost if len(visited_set)==N else -1
+  
+  Time is O(ElogE) and space is O(E)
+  
