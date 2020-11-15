@@ -2578,3 +2578,29 @@ class Solution:
             res.append(max(temp))
         
         return res 
+
+1011. Capacity To Ship Packages Within D Days
+
+class Solution:
+    def shipWithinDays(self, weights: List[int], D: int) -> int:
+        low, high = max(weights), sum(weights)
+        while low<high:
+            mid = (low+high)//2
+            cur_capacity = 0
+            cur_ships =1
+            
+            for w in weights:
+                cur_capacity+=w
+                if cur_capacity>mid:
+                    cur_capacity=w
+                    cur_ships+=1
+                
+            if cur_ships>D:
+                low=mid+1
+            
+            else:
+                high = mid
+            
+        return low
+        
+Time is O(nlogn) and space is O(1)
