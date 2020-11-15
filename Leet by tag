@@ -2663,3 +2663,14 @@ class Solution:
   
   Time is O(ElogE) and space is O(E)
   
+1004. Max Consecutive Ones III
+O(n) and O(1class Solution:
+
+    def longestOnes(self, A: List[int], K: int) -> int:
+        left,right = 0,0 
+        for right in range(len(A)):
+            K-=1-A[right]
+            if K<0:
+                K+= 1-A[left]
+                left+=1
+        return right -left +1
