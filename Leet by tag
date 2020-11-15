@@ -2452,3 +2452,28 @@ class Solution:
             return True
         
         return helper(root)
+       
+  
+ 1258. Synonymous Sentences
+ 
+ class Solution:
+    def generateSentences(self, synonyms: List[List[str]], text: str) -> List[str]:
+        lookup = collections.defaultdict(dict)
+        res = set()
+        queue = collections.deque()
+        queue.append(text)
+        for i,j in synonyms:
+            lookup[i][j]=1
+            lookup[j][i]=1
+        
+        while queue:
+            current = queue.popleft()
+            res.add(current)
+            words = current.split()
+            for i,w in enumerate(words):
+                if w in lookup.keys():
+                    for newWord in lookup[w]:
+                        newSent = " ".join(words[:i]+[newWord]+words[i+1:])
+                        if newSent not in res:
+                            queue.append(newSent)
+        return sorted(list(res))
