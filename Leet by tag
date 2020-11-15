@@ -1385,7 +1385,20 @@ LeetCode505. The Maze II
 
 LeetCode46. Permutations
 
-
+Time and space complexity is O(NN!)
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        res=[]
+        self.dfs(nums,[],res)
+        return res
+    
+    def dfs(self,ds,fixed_path,res):
+        if not ds:
+            res.append(fixed_path)
+            return
+        
+        for i in range(len(ds)):
+            self.dfs(ds[:i]+ds[i+1:],fixed_path+[ds[i]],res)
 
 LeetCode47. Permutations II
 
