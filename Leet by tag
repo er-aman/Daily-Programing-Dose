@@ -2477,3 +2477,42 @@ class Solution:
                         if newSent not in res:
                             queue.append(newSent)
         return sorted(list(res))
+        
+ 151. Reverse Words in a String
+ 
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        s= [i for i in s]
+        self.reverse(s,0,len(s)-1)
+        previous =0 
+        for i in range(len(s)):
+            if s[i]==" ":
+                self.reverse(s,previous,i-1)
+                previous=i+1
+            elif i == len(s)-1:
+                self.reverse(s,previous,i)
+        return "".join(s)
+    def reverse(self, s,left, right):
+        while left<right:
+            s[left], s[right] = s[right],s[left]
+            left+=1
+            right-=1
+            
+841. Keys and Rooms
+
+class Solution:
+    def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+        seen =[False]* len(rooms)
+        seen[0] = True
+        stack=[0]
+        while stack:
+            cur= stack.pop()
+            for room in rooms[cur]:
+                if not seen[room]:
+                    seen[room]=True
+                    stack.append(room)
+        return all(seen)
+        
+
+
+        
