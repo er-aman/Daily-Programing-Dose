@@ -2604,3 +2604,38 @@ class Solution:
         return low
         
 Time is O(nlogn) and space is O(1)
+
+529. Minesweeper
+class Solution:
+    def updateBoard(self, board: List[List[str]], click: List[int]) -> List[List[str]]:
+        row,col = click[0],click[1]
+        directions=[(-1,0),(0,-1),(1,0),(0,1),(-1,-1),(1,1),(1,-1),(-1,1)]
+        if board[row][col]=="M":
+            board[row][col]="X"
+            return board
+        
+        else:
+            count=0
+            for m, n in directions:
+                new_row = row+m
+                new_col = col +n
+                if not (0<=new_row<len(board) and 0<=new_col<len(board[0])):
+                    continue
+                if board[new_row][new_col]=="M":
+                    count+=1
+            if count:
+                board[row][col]=str(count)
+            
+            else:
+                board[row][col]="B"
+                for m, n in directions:
+                    new_row = row+m
+                    new_col = col +n
+                    if not (0<=new_row<len(board) and 0<=new_col<len(board[0])):
+                        continue
+                    if board[new_row][new_col]=="E":
+                        self.updateBoard(board,(new_row,new_col))
+        return board
+   Time is O(mn) space is O(1)
+   
+   
