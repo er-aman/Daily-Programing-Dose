@@ -2854,3 +2854,22 @@ class Solution:
         
         m,n = len(grid),len(grid[0])
         return max(dfs(grid,i,j,0,set()) for j in range(n) for i in range(m))
+        
+ 1057. Campus Bikes
+ Time is O(nlogn) and space is O(n)
+ class Solution:
+    def assignBikes(self, workers: List[List[int]], bikes: List[List[int]]) -> List[int]:
+        distances=[]
+        for i,worker in enumerate(workers):
+            for j,bike in enumerate(bikes):
+                distance = abs(worker[0]-bike[0])+abs(worker[1]-bike[1])
+                distances.append((distance,i,j))
+        
+        results =[-1]*len(workers)
+        distances.sort()
+        allotted = set()
+        for distance,i,j in distances:
+            if results[i]==-1 and j not in allotted:
+                results[i]=j
+                allotted.add(j)
+        return results
