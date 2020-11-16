@@ -1826,6 +1826,22 @@ class Solution:
 
 216. Combination Sum III
 
+O(k) space and time is 9!k/(9-k)! .K 
+
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        res=[]
+        def dfs(ds,k,n,path):
+            if k<0 or n<0:
+                return 
+            if k==0 and n==0:
+                res.append(path)
+            for i in range(len(ds)):
+                dfs(ds[i+1:],k-1,n-ds[i],path+[ds[i]])
+        
+        dfs(list(range(1,10)),k,n,[])
+        return res
+
 70. Climbing Stairs
 
 LeetCode279. Perfect Squares
