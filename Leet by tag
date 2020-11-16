@@ -2720,3 +2720,21 @@ class Solution:
             ans[j]=ans[j]*right
             right*=nums[j]
         return ans
+
+1031. Maximum Sum of Two Non-Overlapping Subarrays
+
+Time is O(n) space is O(n)
+class Solution:
+    def maxSumTwoNoOverlap(self, A: List[int], L: int, M: int) -> int:
+        for i in range(1,len(A)):
+            A[i]+=A[i-1]
+        res,lmax,rmax = A[L+M-1],A[L-1],A[M-1]
+        for i in range(L+M,len(A)):
+            lmax = max(lmax, A[i-M]-A[i-L-M])
+            res = max(res,lmax+A[i]-A[i-M])
+        
+        for i in range(L+M,len(A)):
+            rmax = max(rmax, A[i-L]-A[i-L-M])
+            res = max(res,rmax+A[i]-A[i-L])
+        return res
+
