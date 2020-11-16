@@ -409,6 +409,7 @@ class Solution:
             for j in range(i,len(matrix)):
                 matrix[j][i], matrix[i][j]= matrix[i][j], matrix[j][i]
                 
+                
         
         for row in matrix:
             row=row.reverse()
@@ -2773,3 +2774,20 @@ class Solution:
             res.append(lookup[key])
         
         return res
+
+540. Single Element in a Sorted Array
+
+O(log n) space is O(1)
+class Solution:
+    def singleNonDuplicate(self, nums: List[int]) -> int:
+        l,r= 0,len(nums)-1
+        while l+1<r:
+            mid = l +(r-l)//2
+            if mid%2!=0:
+                mid = mid -1
+            
+            if nums[mid]==nums[mid+1]:
+                l= mid+2
+            else:
+                r=mid
+        return nums[l]
