@@ -1640,6 +1640,22 @@ LeetCode773. Sliding Puzzle
 
 LeetCode547. Friend Circles
 
+class Solution:
+    def findCircleNum(self, M: List[List[int]]) -> int:
+        n= len(M)
+        seen= set()
+        res=0
+        def dfs(i):
+            for j,adj in enumerate(M[i]):
+                if adj and j not in seen:
+                    seen.add(j)
+                    dfs(j)
+        for i in range(n):
+            if i not in seen:
+                dfs(i)
+                res+=1
+        return res
+
 LeetCode425. Word Squares
 
 LeetCode444. Sequence Reconstruction
