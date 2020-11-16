@@ -2833,3 +2833,24 @@ class BSTIterator:
 # obj = BSTIterator(root)
 # param_1 = obj.next()
 # param_2 = obj.hasNext()
+
+1219. Path with Maximum Gold
+Time: O(k * 4 ^ k + m * n), space: O(m * n),
+class Solution:
+    def getMaximumGold(self, grid: List[List[int]]) -> int:
+        def dfs(grid,i,j,total,seen):
+            directions=[(-1,0),(0,-1),(1,0),(0,1)]
+            if not (0<=i<len(grid) and 0<=j<len(grid[0])) or grid[i][j]==0 or (i,j) in seen:  
+                return total
+            seen.add((i,j))
+            total+=grid[i][j]
+            mx=0
+            for m,n in directions:
+                new_row = i+m
+                new_col = j+n
+                mx = max(dfs(grid,new_row,new_col,total,seen),mx)
+            seen.discard((i,j))
+            return mx
+        
+        m,n = len(grid),len(grid[0])
+        return max(dfs(grid,i,j,0,set()) for j in range(n) for i in range(m))
