@@ -2755,3 +2755,21 @@ class Solution:
             res = max(res,rmax+A[i]-A[i-L])
         return res
 
+49. Group Anagrams
+
+import collections
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        lookup = collections.defaultdict(list)
+        for i in strs:
+            temp = "".join(sorted(i))
+            if temp in lookup:
+                lookup[temp].append(i)
+            else:
+                lookup[temp]=[i]
+        
+        res=[]
+        for key in lookup.keys():
+            res.append(lookup[key])
+        
+        return res
