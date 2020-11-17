@@ -1631,6 +1631,31 @@ LeetCode305. Number of Island II
 
 LeetCode323. Number of Connected Components in an Undirected Graph
 
+Time: O(n+m), where m is the number of connections, n is the number of nodes.
+Space: O(n+m)
+
+class Solution:
+    def countComponents(self, n: int, edges: List[List[int]]) -> int:
+        
+        def dfs(lookup,i, seen):
+            if i in seen:
+                return
+            seen.add(i)
+            for j in lookup[i]:
+                dfs(lookup,j,seen)
+        lookup = {i:[] for i in range(n)}
+        for i,j in edges:
+            lookup[i].append(j)
+            lookup[j].append(i)
+        seen = set()
+        res=0
+        for i in range(n):
+            if i not in seen:
+                dfs(lookup,i,seen)
+                res+=1
+        return res
+    
+
 LeetCode353. SNAKE
 
 LeetCode269. Alien Dictionary
