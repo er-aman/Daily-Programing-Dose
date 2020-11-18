@@ -3176,3 +3176,36 @@ class NestedIterator:
 # Your NestedIterator object will be instantiated and called as such:
 # i, v = NestedIterator(nestedList), []
 # while i.hasNext(): v.append(i.next())
+
+
+1041. Robot Bounded In Circle
+Time O(n) and space O(1)
+# start position (0,0)
+# visited_set
+# for i in instructions:
+#  if i == G : new_pos = (start[0]+1,start[1]+1)
+# add=> new position to visited set 
+# update the start position as new_pos
+#
+class Solution:
+    def isRobotBounded(self, instructions: str) -> bool:
+        x,y,dx,dy = 0,0,0,1
+        for i in instructions:
+            if i=="R": dx,dy = dy,-dx
+            if i=="L": dx,dy = -dy,dx
+            if i=="G": x,y = x+dx,y+dy
+            
+        return (x,y)==(0,0) or (dx,dy)!=(0,1)
+
+96. Unique Binary Search Trees
+O(n^2) and O(1)
+
+class Solution:
+    def numTrees(self, n: int) -> int:
+        ds=[0]*(n+1)
+        ds[0],ds[1]=1,1
+        for i in range(2,n+1):
+            for j in range(1,i+1):
+                ds[i]+=(ds[j-1]*ds[i-j])
+        
+        return ds[n]
