@@ -2915,3 +2915,27 @@ class Solution:
         return "".join([e*c for e,c in stack])
         
         
+694. Number of Distinct Islands
+
+class Solution:
+    def numDistinctIslands(self, grid: List[List[int]]) -> int:
+        def dfs(i,j,positions,rel_pos):
+            directions=[(0,1),(1,0),(-1,0),(0,-1)]
+            grid[i][j]=-1
+
+            for m,n in directions:
+                new_row = i+m
+                new_col = j+n 
+                if (0<=new_row<len(grid) and 0<=new_col<len(grid[0])) and grid[new_row][new_col]==1:
+                    new_rel = (rel_pos[0]+m,rel_pos[1]+n)
+                    postions.append(new_rel) 
+                    dfs(new_row, new_col, postions,new_rel)
+  
+        num_shapes = set()
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j]==1:
+                    postions=[]
+                    dfs(i,j,postions,(0,0))
+                    num_shapes.add(tuple(postions))
+        return len(num_shapes)
