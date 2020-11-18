@@ -2939,3 +2939,27 @@ class Solution:
                     dfs(i,j,postions,(0,0))
                     num_shapes.add(tuple(postions))
         return len(num_shapes)
+
+
+1019. Next Greater Node In Linked List
+Time and space O(n)
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def nextLargerNodes(self, head: ListNode) -> List[int]:
+        pos=-1
+        stack=[]
+        ans=[]
+        
+        while head:
+            pos+=1
+            ans.append(0)
+            while stack and stack[-1][1]<head.val:
+                idx,_= stack.pop()
+                ans[idx]=head.val
+            stack.append((pos,head.val))
+            head=head.next
+        return ans 
