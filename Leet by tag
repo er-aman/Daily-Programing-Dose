@@ -3253,4 +3253,55 @@ class Solution:
             res.next= ListNode(1)
         
         return res
+
+
+445. Add Two Numbers II
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        last = None
+        while head:
+            # keep the next node
+            tmp = head.next
+            # reverse the link
+            head.next = last
+            # update the last node and the current node
+            last = head
+            head = tmp
+        
+        return last
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        l1 = self.reverseList(l1)
+        l2 = self.reverseList(l2)
+        
+        carry=0
+        head = None 
+        while l1 or l2:
+            x1 = l1.val if l1 else 0 
+            x2 = l2.val if l2 else 0 
             
+            val = x1+x2 + carry
+            if val>=10:
+                val= val-10
+                carry=1
+            else:
+                carry =0
+            
+            cur = ListNode(val)
+            cur.next = head
+            head = cur
+            
+            l1 = l1.next if l1 else None 
+            l2 = l2.next if l2 else None
+            
+        if carry !=0:
+            cur = ListNode(carry)
+            cur.next = head
+            head = cur
+        return head 
+            
+           
