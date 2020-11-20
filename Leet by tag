@@ -3470,3 +3470,15 @@ class Solution:
                 res = min(res,count0+count1)
                 count1+=1
         return res
+
+875. Koko Eating Bananas
+O(nlogm)
+class Solution:
+    def minEatingSpeed(self, piles: List[int], H: int) -> int:
+        l,r =1,max(piles)
+        
+        while l < r:
+            m = (l + r) // 2
+            if sum(math.ceil(p/m) for p in piles) > H: l = m + 1
+            else: r = m
+        return l
