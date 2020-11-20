@@ -3385,3 +3385,39 @@ class Codec:
 # Your Codec object will be instantiated and called as such:
 # codec = Codec()
 # codec.deserialize(codec.serialize(root))
+
+399. Evaluate Division
+O(n^2/m) where n is distinct values and m are the queries.
+
+class Solution:
+    def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
+        
+        lookup = collections.defaultdict(dict)
+        for ([x,y], val) in zip(equations,values):
+            lookup[x][y]=val
+            lookup[y][x]=1/val
+        
+        def find_product(start,end):
+            if start not in lookup or end not in lookup:
+                return -1.0
+            if start ==end:
+                return 1.0
+            queue =deque([(start,1.0)])
+            visited ={start}
+            while queue:
+                cur_start, cur_val = queue.popleft() # a
+                for child,val in lookup[cur_start].items(): #child b and 2.0
+                    if child in visited:
+                        continue
+                    new_val = cur_val * val      # new_val 2.0
+                    if child ==end:              # b!=c
+                        return new_val
+                    lookup[start][child]=new_val  #a:{b:2},b:{a:0.5}
+                    lookup[child][start]=1/new_val
+                    visited.add(child)
+                    queue.append((child,new_val))
+            return -1.0
+                    
+        
+        
+        return [find_product(start,end) for [start,end] in queries]
