@@ -3331,3 +3331,57 @@ class Solution:
             else:
                 res+=lookup[s[i]]
         return res
+        
+449. Serialize and Deserialize BST
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+from collections import deque
+class Codec:
+
+    def serialize(self, root: TreeNode) -> str:
+        """Encodes a tree to a single string.
+        """
+        if not root:
+            return ""
+        queue= deque([root])
+        res=""
+        while queue:
+            cur = queue.popleft()
+            if cur:
+                res = res + str(cur.val)+","
+                queue.append(cur.left)
+                queue.append(cur.right)
+            else:
+                res = res + "None " +","
+        return res[:-1]
+
+    def deserialize(self, data: str) -> TreeNode:
+        """Decodes your encoded data to tree.
+        """
+        if not data:
+            return None
+        data = data.split(",")
+        root = TreeNode(int(data[0]))
+        queue=deque([root])
+        i=1
+        while queue:
+            cur = queue.popleft()
+            if data[i]!="None":
+                cur.left= TreeNode(int(data[i]))
+                queue.append(cur.left)
+            i+=1
+            if data[i]!="None":
+                cur.right = TreeNode(int(data[i]))
+                queue.append(cur.right)
+            i+=1
+        return root
+        
+
+# Your Codec object will be instantiated and called as such:
+# codec = Codec()
+# codec.deserialize(codec.serialize(root))
