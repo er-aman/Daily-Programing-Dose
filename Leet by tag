@@ -2042,6 +2042,8 @@ class Solution:
         
 LC 375. Guess Number Higher or Lower II
 
+
+
 LC 363. Max Sum of Rectangle No Larger Than K
 
 LC 44. Wildcard Matching
@@ -3451,3 +3453,20 @@ class Solution:
         
         
         return [find_product(start,end) for [start,end] in queries]
+        
+        
+926. Flip String to Monotone Increasing
+
+class Solution:
+    def minFlipsMonoIncr(self, S: str) -> int:
+        n = len(S)
+        count0 = S.count('0')
+        count1=0
+        res = n - count0 
+        for i in range(n):
+            if S[i]=='0':
+                count0-=1
+            else:
+                res = min(res,count0+count1)
+                count1+=1
+        return res
