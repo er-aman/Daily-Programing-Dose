@@ -21,9 +21,9 @@ LeetCode88. Merge Sorted Array:--
             k-=1
        nums1[:j+1] = nums2[:j+1]
 
-LeetCode186. Reverse Words in a String II
+LeetCode186. Reverse Words in a String 11
              
-             1st i need to define a reverse function which takes list, left and right pointers :- 
+             1st i need to define a reverse function which takes list, left and right pointers
              2) revesrse the entire list using the function
              3) for loop over the list and check for empty space element and run the below function:
              self.reverse(s,0,len(s)-1) ===> reverses the list
