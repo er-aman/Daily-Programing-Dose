@@ -2018,6 +2018,28 @@ LeetCode132. Palindrome Partitioning II
 
 LeetCode91. Decode Ways
 
+class Solution:
+    def __init__(self):
+        self.mem ={}
+    
+    def recurse(self,s,index):
+        if index == len(s):
+            return 1
+        if s[index]==0:
+            return 0
+        if index == len(s)-1:
+            return 1
+        if index in self.mem:
+            return self.mem[index]
+        ans = self.recurse(s,index+1) + (self.recurse(s,index+2) if (int(s[index: index+2])<=26) else 0)
+        self.mem[index]= ans 
+        return ans
+        
+    def numDecodings(self, s: str) -> int:
+        if not s:
+            return 0
+        return self.recurse(s,0)
+        
 LeetCode639. Decode Ways II
 
 LeetCode354. Russian Doll Envelopes
