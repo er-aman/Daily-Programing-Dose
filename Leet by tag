@@ -3702,3 +3702,25 @@ class Solution:
                 i+=2
                 j+=2
         return A
+        
+557. Reverse Words in a String III        
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        list_s = list(s)
+        start=0
+        end =0 
+        while end<len(list_s):
+            if end == len(list_s)-1:
+                list_s= self.reverse(list_s,start,end)
+            if list_s[end]==" ":
+                list_s= self.reverse(list_s,start,end-1)
+                start=end+1
+            end+=1
+        return "".join(list_s)
+    
+    def reverse(self,s_list,start,end):
+        while start<end:
+            s_list[start],s_list[end] = s_list[end],s_list[start]
+            start+=1
+            end-=1
+        return s_list
