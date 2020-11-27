@@ -3785,3 +3785,13 @@ class Solution:
             cur.right = TreeNode(v)
             cur = cur.right
         return res.right
+        
+        
+1299. Replace Elements with Greatest Element on Right Side
+
+class Solution:
+    def replaceElements(self, arr: List[int],mx=-1) -> List[int]:
+        for i in range(len(arr)-1,-1,-1):
+            arr[i],mx= mx, max(mx,arr[i])
+        return arr
+        
