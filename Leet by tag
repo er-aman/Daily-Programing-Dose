@@ -3766,3 +3766,22 @@ class Solution:
                 res.appendleft(right*right)
                 r-=1
         return list(res)
+
+897. Increasing Order Search Tree
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def increasingBST(self, root: TreeNode) -> TreeNode:
+        def getInorder(root):
+            return getInorder(root.left) + [root.val]+ getInorder(root.right) if root else []
+        inorder_list = getInorder(root)
+        res=cur = TreeNode(None)
+        for v in inorder_list:
+            cur.right = TreeNode(v)
+            cur = cur.right
+        return res.right
