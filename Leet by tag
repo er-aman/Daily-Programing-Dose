@@ -3557,3 +3557,32 @@ class Solution:
             if temp1!=temp2:
                 return -1 if temp1<temp2 else 1
         return 0 
+
+61. Rotate List
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def rotateRight(self, head: ListNode, k: int) -> ListNode:
+        if not head or not head.next:
+            return head
+        
+        count= 1 
+        last=head
+        while last.next:
+            count+=1
+            last = last.next
+        middle = head
+        if k%count==0:
+            return head
+        
+        for i in range(count-k%count-1):
+            middle = middle.next
+        
+        new_head = middle.next
+        last.next = head
+        middle.next = None
+        return new_head
+        
