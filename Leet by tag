@@ -3918,3 +3918,19 @@ class Solution:
                 break
             c+= nums[i]-nums[0]
         return c 
+
+Kth Largest Element in a Stream
+
+import heapq
+class KthLargest:
+
+    def __init__(self, k: int, nums: List[int]):
+        self.k = k
+        self.my_heap =[]
+        for n in nums:
+            self.add(n)
+    def add(self, val: int) -> int:
+        heapq.heappush(self.my_heap,val)
+        while len(self.my_heap)>self.k:
+            heapq.heappop(self.my_heap)
+        return self.my_heap[0]
