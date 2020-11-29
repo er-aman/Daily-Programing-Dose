@@ -3882,3 +3882,27 @@ class Solution:
         else:
             length = gcd(len(str1),len(str2))
             return self.gcdOfStrings(str1[:length], str2[:length])
+
+257. Binary Tree Paths
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def binaryTreePaths(self, root: TreeNode) -> List[str]:
+        if not root:
+            return []
+        queue = collections.deque([(root,'')])
+        res=[]
+        while queue:
+            cur,path = queue.popleft()
+            if not cur.left and not cur.right:
+                res.append(path+str(cur.val))
+            if cur.left:
+                queue.append((cur.left,path+str(cur.val)+'->'))
+            if cur.right:
+                queue.append((cur.right,path+str(cur.val)+'->'))
+        
+        return res
