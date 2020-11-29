@@ -3934,3 +3934,18 @@ class KthLargest:
         while len(self.my_heap)>self.k:
             heapq.heappop(self.my_heap)
         return self.my_heap[0]
+
+1013. Partition Array Into Three Parts With Equal Sum
+
+class Solution:
+    def canThreePartsEqualSum(self, A: List[int]) -> bool:
+        total = sum(A)
+        if total%3 !=0:
+            return False
+        count, cum, target = 0,0,total//3
+        for n in A:
+            cum+=n
+            if cum == target:
+                cum=0
+                count+=1
+        return count>=3
