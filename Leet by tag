@@ -4027,3 +4027,45 @@ def closestHelper(root,target):
             node = node.right
     return closest
                     
+
+
+796. Rotate String
+
+import collections 
+class Solution:
+    def rotateString(self, A: str, B: str) -> bool:
+        stack1 = collections.deque()
+        stack2 = collections.deque()
+        l1 = len(A)
+        l2 = len(B)
+        
+        if l1==0 and l2==0:
+            return True
+        if l1!=l2:
+            return False
+        
+        for i in A:
+            stack1.append(i)
+        
+        for j in B:
+            stack2.append(j)
+            
+        for i in range(l1):
+            if stack1==stack2:
+                return True
+            char = stack1.pop()
+            stack1.insert(0,char)
+        return False
+        
+   another solution i sreturn 
+   
+   return True if len(A) == len(B) and B in A+A else False 
+   
+   541. Reverse String II
+
+class Solution:
+    def reverseStr(self, s: str, k: int) -> str:
+        a = list(s)
+        for i in range(0,len(a),2*k):
+            a[i:i+k] = reversed(a[i:i+k])
+        return "".join(a)
