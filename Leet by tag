@@ -4069,3 +4069,20 @@ class Solution:
         for i in range(0,len(a),2*k):
             a[i:i+k] = reversed(a[i:i+k])
         return "".join(a)
+
+235. Lowest Common Ancestor of a Binary Search Tree
+
+class Solution:
+    # @param {TreeNode} root
+    # @param {TreeNode} p
+    # @param {TreeNode} q
+    # @return {TreeNode}
+    def lowestCommonAncestor(self, root, p, q):
+        if not root or not p or not q:
+            return None
+        if (max(p.val, q.val) < root.val):
+            return self.lowestCommonAncestor(root.left, p, q)
+        elif (min(p.val, q.val) > root.val):
+            return self.lowestCommonAncestor(root.right, p, q)
+        else:
+            return root
