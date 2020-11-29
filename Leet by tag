@@ -3977,3 +3977,25 @@ class Solution:
             x2=x2*10+convert(j)
         x=x1+x2
         return str(x)
+
+543. Diameter of Binary Tree
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def diameterOfBinaryTree(self, root: TreeNode) -> int:
+        self.diameter =1 
+        def height(root):
+            if not root:
+                return 0 
+            left = height(root.left)
+            right = height(root.right)
+            self.diameter = max(self.diameter, left+right+1)
+            return max(left,right)+1
+        
+        height(root)
+        return self.diameter -1
