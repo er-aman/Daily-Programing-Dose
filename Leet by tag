@@ -3870,3 +3870,15 @@ class Solution:
         lookup = {char:ind for ind,char in enumerate(order)}
         words = [[lookup[ch] for ch in w ]for w in words]
         return all(w1<=w2 for w1,w2 in zip(words,words[1:]))
+
+1071. Greatest Common Divisor of Strings
+
+class Solution:
+    def gcdOfStrings(self, str1: str, str2: str) -> str:
+        if str1+str2 != str2+str1:
+            return ''
+        elif str1 == str2:
+            return str1
+        else:
+            length = gcd(len(str1),len(str2))
+            return self.gcdOfStrings(str1[:length], str2[:length])
