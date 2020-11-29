@@ -4165,3 +4165,8 @@ class Solution:
         def convert(p):
             return "!"+ str(p.val)+"@"+convert(p.left)+convert(p.right) if p else "$"
         return convert(t) in convert(s)
+
+459. Repeated Substring Pattern
+class Solution:
+    def repeatedSubstringPattern(self, s: str) -> bool:
+        return s in (s*2)[1]
