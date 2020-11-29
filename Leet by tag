@@ -4086,3 +4086,14 @@ class Solution:
             return self.lowestCommonAncestor(root.right, p, q)
         else:
             return root
+
+1010. Pairs of Songs With Total Durations Divisible by 60
+class Solution:
+    def numPairsDivisibleBy60(self, time: List[int]) -> int:
+        result=0 
+        count= collections.Counter()
+        
+        for t in time:
+            result+= count[-t%60]
+            count[t%60]+=1
+        return result
