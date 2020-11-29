@@ -3999,3 +3999,31 @@ class Solution:
         
         height(root)
         return self.diameter -1
+
+270. Closest Binary Search Tree Value
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def closestValue(self, root: TreeNode, target: float) -> int:
+        if not root:
+            return
+        return closestHelper(root,target)
+        
+def closestHelper(root,target):
+    closest=root.val
+    node=root
+    while node:
+        if abs(target-node.val)<abs(target-closest):
+            closest = node.val
+        if node.val>target:
+            node =node.left
+
+        else:
+            node = node.right
+    return closest
+                    
