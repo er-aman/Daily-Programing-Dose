@@ -4211,3 +4211,30 @@ class Solution:
             fast = fast.next.next
         
         return True 
+
+112. Path Sum
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def hasPathSum(self, root: TreeNode, total: int) -> bool:
+        if not root:
+            return None 
+        
+        nodes =[(root,total-root.val)]
+        
+        while nodes:
+            node, cur_sum = nodes.pop()
+            
+            if not node.left and not node.right and cur_sum==0:
+                return True
+            
+            if node.left:
+                nodes.append((node.left, cur_sum-node.left.val))
+            if node.right:
+                nodes.append((node.right, cur_sum-node.right.val))
+        return False
