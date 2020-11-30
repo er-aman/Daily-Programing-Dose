@@ -650,7 +650,12 @@ class Solution:
         for number in range(n):
             if number not in num_set:
                 return number
-                
+
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        n = len(nums)
+        index_total = n*(n+1)/2
+        return int(index_total - sum(nums))                
 LC 287. Find the Duplicate Number
 
 import collections
