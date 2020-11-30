@@ -4400,3 +4400,15 @@ class Solution:
             res = res*10 + x%10
             x//=10
         return 0 if res> pow(2,31) else symbol*res
+
+665. Non-decreasing Array
+
+class Solution:
+    def checkPossibility(self, nums: List[int]) -> bool:
+        one, two = nums[:], nums[:]
+        for i in range(len(nums) - 1):
+            if nums[i] > nums[i + 1]:
+                one[i] = nums[i + 1]
+                two[i + 1] = nums[i]
+                break
+        return one == sorted(one) or two == sorted(two)
