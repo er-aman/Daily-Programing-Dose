@@ -4238,3 +4238,15 @@ class Solution:
             if node.right:
                 nodes.append((node.right, cur_sum-node.right.val))
         return False
+
+643. Maximum Average Subarray I
+
+class Solution:
+    def findMaxAverage(self, nums: List[int], k: int) -> float:
+        cum =[0]
+        for i in nums:
+            cum.append(cum[-1]+i)
+        mx= float('-inf')
+        for i in range(len(cum)-k):
+            mx = max(mx,cum[i+k]-cum[i])
+        return mx/k
