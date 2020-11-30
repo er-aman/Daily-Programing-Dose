@@ -4367,3 +4367,36 @@ class Solution:
             else:
                 return prefix
         return ""
+
+680. Valid Palindrome II
+class Solution(object):
+    def validPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        # Time: O(n)
+        # Space: O(n)
+        left, right = 0, len(s) - 1
+        while left < right:
+            if s[left] != s[right]:
+                one, two = s[left:right], s[left + 1:right + 1]
+                return one == one[::-1] or two == two[::-1]
+            left, right = left + 1, right - 1
+        return True
+        
+7. Reverse Integer
+
+class Solution:
+    def reverse(self, x: int) -> int:
+        res =0 
+        if x<0:
+            symbol = -1
+            x=-x
+        else:
+            symbol =1 
+            
+        while x:
+            res = res*10 + x%10
+            x//=10
+        return 0 if res> pow(2,31) else symbol*res
