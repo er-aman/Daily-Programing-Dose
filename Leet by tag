@@ -4289,3 +4289,24 @@ class Solution:
         else:
             digits[-1]+=1
         return digits
+        
+205. Isomorphic Strings
+
+
+
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        lookup = collections.defaultdict(int)
+        assigned = set()
+        for ind,ch in enumerate(s):
+            if ch not in lookup:
+                if t[ind] not in assigned:
+                    lookup[ch]=t[ind]
+                    assigned.add(t[ind])
+                else:
+                    return False
+            else:
+                if lookup[ch] !=t[ind]:
+                    return False
+                
+        return True
