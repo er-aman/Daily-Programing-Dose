@@ -4353,3 +4353,17 @@ class Solution:
             elif (ch in d1 and d1[ch] != word):
                 return 0
         return 1
+
+14. Longest Common Prefix
+
+
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        prefix=""
+        
+        for c in zip(*strs):
+            if all(c[0]==i for i in c):
+                prefix+=c[0]
+            else:
+                return prefix
+        return ""
