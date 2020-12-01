@@ -4200,7 +4200,7 @@ class Solution:
 459. Repeated Substring Pattern
 class Solution:
     def repeatedSubstringPattern(self, s: str) -> bool:
-        return s in (s*2)[1]
+        return s in (s*2)[1:-1]
 
 160. Intersection of Two Linked Lists
 
