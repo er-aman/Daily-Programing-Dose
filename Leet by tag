@@ -4460,3 +4460,13 @@ class Solution:
             total = total + abs(rows[i]-meeting[0]) + abs(cols[i]-meeting[1])
         return total
 
+1014. Best Sightseeing Pair
+
+class Solution:
+    def maxScoreSightseeingPair(self, A: List[int]) -> int:
+        maxSoFar = A[0]
+        result = 0 
+        for i in range(1,len(A)):
+            result = max(result, maxSoFar+A[i]-i)
+            maxSoFar = max(maxSoFar,A[i]+i)
+        return result
