@@ -1656,16 +1656,50 @@ class solution:
                 return float(self.large[0]-self.small[0])/2.0
         else:
                 return float(self.large[0])
+
+class MedianFinder:
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.stack=[]
+    def addNum(self, num: int) -> None:
+        self.stack.append(num)
+
+    def findMedian(self) -> float:
+        l,r=0,len(self.stack)-1
+        mid = (l+r)//2
+        if len(self.stack)%2!=0:
+            return self.stack[mid]
+        else:
+            return (self.stack[mid] + self.stack[mid+1])/2
+
+
+# Your MedianFinder object will be instantiated and called as such:
+# obj = MedianFinder()
+# obj.addNum(num)
+# param_2 = obj.findMedian()
                 
 261. Graph Valid Tree
 
+
+
 253. Meeting Room II
+
+
 
 207. Course Schedule
 
+
+
 339. Nested List Weight Sum
 
+
+
 23. Merge k Sorted Lists
+
+
 
 199. Binary Tree Right Side View
 
@@ -1697,6 +1731,8 @@ class Solution:
         return res 
 
 90. Subset II
+
+
 
 301. Remove invalid parentheses(DFS & BFS)
 
