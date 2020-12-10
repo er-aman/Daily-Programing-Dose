@@ -2010,6 +2010,34 @@ Time and space is O(mn)
 
 LeetCode322. Coin Change
 
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        dp =[float('inf') for _ in range(amount+1)]
+        dp[0]=0
+        
+        for i in range(amount+1):
+            for coin in coins:
+                if i>=coin:
+                    dp[i]=min(dp[i], 1+dp[i-coin])
+                
+        return dp[-1] if dp[-1]!=float('inf') else -1
+                
+                
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        queue = collections.deque([(amount,0)])
+        seen= set([amount])
+        while queue:
+            current, used_coins = queue.popleft()
+            if current == 0:
+                return used_coins
+            for c in coins:
+                remaining = current - c
+                if remaining >= 0 and remaining not in seen:
+                    seen.add(remaining)
+                    queue.append((remaining, used_coins + 1))
+
+        return -1                
 
 LeetCode518. Coin Change II
 
