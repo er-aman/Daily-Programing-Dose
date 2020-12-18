@@ -23,4 +23,3 @@ def smallestNegativeBalance(debts):
     if res[i][0]==res[i-1][0]:
       final_res.append(res[i][1])
   return final_res
-print(smallestNegativeBalance(["Alex Blake 0","Blake Alex 0", "Casey Alex 0", "Blake Casey 0", "Alex Blake 0", "Alex Casey 0"]))
