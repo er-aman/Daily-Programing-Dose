@@ -5,3 +5,33 @@ class Solution:
         for word in slist:
             output.append(word[::-1])
         return " ".join(output)
+
+
+
+
+
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        wordslist = list(s)
+        reversedList = wordslist[:]
+        start = 0
+        end=0
+        while end<len(reversedList):
+            if end ==len(reversedList)-1:
+                reversedList= self.reverseChar(reversedList,start,end)
+            if reversedList[end]==" ":
+                reversedList= self.reverseChar(reversedList,start,end-1)
+                start=end+1
+            end+=1
+        return "".join(reversedList)
+    
+    def reverseChar(self,reversedList,start,end):
+        while start<end:
+            reversedList[start], reversedList[end]= reversedList[end],reversedList[start]
+            start+=1
+            end -=1
+        return reversedList
+    
+    
+    
+            
