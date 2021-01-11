@@ -1,0 +1,8 @@
+class Solution:
+    def heightChecker(self, heights: List[int]) -> int:
+        new_array = sorted(heights)
+        count=0
+        for i in range(len(heights)):
+            if heights.pop(0) != new_array.pop(0):
+                count+=1
+        return count
