@@ -1,0 +1,11 @@
+import datetime 
+
+deltaTime = datetime.timedelta(days=1)
+def nextWorkingDay():
+  holidaysLookup ={datetime.date(2021,1,12), datetime.date(2021,1,13),
+  datetime.date(2021,1,14), datetime.date(2021,1,15)}
+  nexDay = datetime.date.today() + deltaTime
+  satSun = {5,6} 
+  while nexDay.weekday() in satSun or nexDay in holidaysLookup:
+    nexDay+=deltaTime
+  return nexDay
