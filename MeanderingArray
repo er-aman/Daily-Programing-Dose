@@ -1,0 +1,14 @@
+# meandered array
+def meanderingArray(unsortedArray):
+  sortedArray = sorted(unsortedArray)
+  res=[]
+  
+  while len(sortedArray)>1:
+    res += [sortedArray[-1],sortedArray[0]]
+    sortedArray=sortedArray[1:-1]
+  res+=sortedArray
+  
+  return res
+  
+print(meanderingArray([2,5,3,1,4,10]))
+    
