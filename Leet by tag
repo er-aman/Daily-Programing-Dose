@@ -119,7 +119,7 @@ LeetCode75. Sort Colors
 class Solution:
     def sortColors(self, nums: List[int]) -> None:
         """
-        Do not return anything, modify nums in-place instead.
+        Do not return anything, modify nums in-place instead. Time is O(n)
         """
         red,white,blue = 0,0,len(nums)-1
         while white<=blue:
