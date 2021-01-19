@@ -554,6 +554,19 @@ class Solution:
 
 LeetCode532. K-diff Pairs in an Array
 
+from collections import Counter
+class Solution:
+    def findPairs(self, nums: List[int], k: int) -> int:
+        if k < 0:
+            return 0
+        if k ==0:
+            counter = Counter(nums)
+            return sum(1 for n, c in counter.most_common() if c>1)
+        
+        s = set(nums)
+        d = set(i -k for i in s)
+        return len((s&d))
+
 LeetCode567. Permutation in String
 
 LeetCode76. Minimum Window Substring
