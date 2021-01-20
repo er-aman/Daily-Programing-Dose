@@ -1,0 +1,22 @@
+"""
+get max numbr
+maxSoFar = float('-inf')
+for i in range(len(string)):
+  temp= string[0:i]+str(d) + string[i+1:]
+
+"""
+
+def getMaxNum(string,d):
+  isNegative = False
+  if string<0:
+    isNegative = True
+  maxSoFar = float('-inf') if not isNegative else float('inf')
+  arr=list(str(string))
+  if isNegative:
+    arr=arr[1:]
+  for i in range(len(arr)+1):
+    temp= arr[0:i]+[str(d)]+ arr[i:]
+    maxSoFar = max(maxSoFar,int("".join(temp))) if not isNegative else min(maxSoFar,int("".join(temp)))
+  return maxSoFar if not isNegative else maxSoFar * (-1)
+
+print(getMaxNum(284,3))
