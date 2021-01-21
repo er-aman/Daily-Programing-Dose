@@ -4699,3 +4699,21 @@ class Solution:
             wordlist = cand
         
         return guessWord
+
+
+--------------------------------------------------------------------------------------------------------
+MicroSoft
+1239. Maximum Length of a Concatenated String with Unique Characters
+
+class Solution:
+    def maxLength(self, arr: List[str]) -> int:
+        res=[""]
+        maxLengthSoFar = 0
+        for string in arr:
+            resLength = len(res)
+            for i in range(resLength):
+                temp = string+res[i]
+                if len(temp) == len(set(list(temp))):
+                    maxLengthSoFar = max(maxLengthSoFar, len(temp))
+                    res.append(string+res[i])
+        return maxLengthSoFar 
