@@ -4819,3 +4819,32 @@ class Solution:
         visited.add(0)
         dfs(0)
         return changes        
+
+
+296. Best Meeting Point
+
+class Solution:
+    def getRowCol(self,grid):
+        rows=[]
+        cols=[]
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j]==1:
+                    rows.append(i)
+                    cols.append(j)
+        return rows,cols
+    
+    def getMedian(self,rows,cols):
+        rows.sort()
+        cols.sort()
+        row_median, col_median = rows[len(rows)//2], cols[len(cols)//2]
+        return row_median, col_median
+    def minTotalDistance(self, grid: List[List[int]]) -> int:
+        rows,cols = self.getRowCol(grid)
+        row_mid,col_mid = self.getMedian(rows,cols)
+        result =0 
+        for row in rows:
+            result+=abs(row_mid - row)
+        for col in cols:
+            result+=abs(col_mid - col)
+        return result 
