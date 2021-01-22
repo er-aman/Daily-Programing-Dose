@@ -4743,3 +4743,16 @@ class Solution:
                     maxLengthSoFar = max(maxLengthSoFar, len(temp))
                     res.append(string+res[i])
         return maxLengthSoFar 
+
+
+1576. Replace All ?'s to Avoid Consecutive Repeating Characters
+
+class Solution:
+    def modifyString(self, s: str) -> str:
+        res=list(s)
+        for i in range(len(res)):
+            if res[i]=="?":
+                for char in "abc":
+                    if (i==0 or res[i-1]!=char) and  (i==len(res)-1 or res[i+1]!=char):
+                        res[i]=char
+        return "".join(res)
