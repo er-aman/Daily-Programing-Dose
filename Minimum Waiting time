@@ -1,0 +1,24 @@
+
+def minimumWaitingTime(queries):
+    # Write your code here.
+	# tempArray=[]
+	# if not queries:
+	# 	return 0
+	# queries.sort()
+	# previous=queries.pop(0)
+	# minWaiT=0
+	# final=0
+	# while queries:
+	# 	curNum= queries.pop(0)
+	# 	minWaiT+=previous
+	# 	final+=minWaiT
+	# 	previous=curNum
+	# return final
+	queries.sort()
+	minWaitingTime=0
+	for idx,val in enumerate(queries):
+		queriesLeft = len(queries)-(idx+1)
+		minWaitingTime+= val*queriesLeft
+	return minWaitingTime
+
+# Time O(nlogn) and space is O(1)
