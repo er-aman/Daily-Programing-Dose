@@ -1,0 +1,110 @@
+def countCounterFiet(array):
+  total=0
+  for cur in array:
+    len_cur = len(cur)
+    if len_cur<10 or len_cur>12:
+      continue
+    cur_part1 = cur[:3]
+    cur_year = int(cur[3:7])
+    cur_curen = int(cur[7:-1])
+    cur_last= cur[-1:]
+    cur_second_last =cur[-2:-1]
+    if isUpper(cur_part1) and inYearRange(cur_year) and validCurreny(cur_curen) and lastvalid(cur_last) and not secondLastchar(cur_second_last):
+      total+=cur_curen
+  return total
+def isUpper(cur_part1):
+  cur_part1 = list(cur_part1)
+  if len(cur_part1) != len(set(cur_part1)):
+    return False
+  for char in cur_part1:
+    if char.islower() or not char.isalpha():
+      return False
+  return True
+  
+def inYearRange(cur_year):
+  start = 1900
+  end=2019
+  if start<=cur_year<=2019:
+    return True
+  return False
+  
+def validCurreny(cur_curen):
+  valid={10,20,50,100,200,500,1000}
+  if cur_curen in valid:
+    return True
+  return False
+  
+def lastvalid(cur_last):
+  if cur_last.isupper():
+    return True
+  return False 
+def secondLastchar(cur_second_last):
+  if cur_second_last.isalpha():
+    return True 
+  return False
+import collections
+import math
+def dfs(lookup,key,res,connected):
+  stack=[key]
+  while stack:
+    curKey= stack.pop(0)
+    for keys in lookup[curKey]:
+      res+=1
+      if keys in lookup:
+        stack.append(keys)
+      
+  connected.append(res)
+  
+def connectedSum(graph_nodes,graphs_from,graphs_to):
+  lookup = {}
+  for i in range(len(graphs_from)):
+    if graphs_from[i] in lookup:
+      lookup[graphs_from[i]].append(graphs_to[i])
+    elif graphs_to[i] in lookup:
+      lookup[graphs_to[i]].append(graphs_from[i])
+    else:
+      lookup[graphs_from[i]]=[graphs_to[i]]
+  print(lookup)
+  # for i in range(len(graphs_from)):
+  #   if graphs_from[i] in lookup:
+  #     lookup[graphs_from[i]].append(graphs_to[i])
+  #     lookup[graphs_to[i]].append(graphs_from[i])
+  #   else:
+  #     lookup[graphs_from[i]]=[graphs_to[i]]
+  #     lookup[graphs_to[i]].append(graphs_from[i])
+  # connected= {key:val for key,val in lookup.items()}
+  # print(connected)
+  # for key in lookup.keys():
+  #   values = lookup[key]
+  #   for val in values:
+  #     if val in connected:
+  #       connected[val]+=[key]
+  #       print()
+  #       connected.pop(key)
+  
+  connected_arry=[len(val)+1 for _,val in lookup.items()]  
+  print(lookup)
+  print(connected_arry)
+  # # for key in lookup.keys():
+  # #   res=1
+  # #   dfs(lookup,key,res,connected,)
+  total_connected=0 
+  # print(connected)
+  for i in connected_arry:
+    total_connected+=i
+  not_cconnected = graph_nodes - total_connected
+  final_res=0 
+  for i in connected_arry:
+    final_res+= math.ceil(math.sqrt(i))
+  
+  if not_cconnected>0:
+    for i in range(not_cconnected):
+      final_res+=1
+  return final_res
+  
+  
+# print( connectedSum(10,[1,1,2,3,7],[2,3,4,5,8]))
+
+print( connectedSum(8,[8, 5, 7, 8],[1, 8, 3, 6]))
+print(countCounterFiet(["A201550B","ABB19991000Z","XYZ200019Z","ERF200220","SCD203010T"]))
+print( connectedSum(16,[6, 9, 11, 15, 13, 12, 15, 1], [11, 5, 9, 9, 15, 14, 16, 16]))
