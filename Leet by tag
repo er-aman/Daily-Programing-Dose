@@ -4847,4 +4847,20 @@ class Solution:
             result+=abs(row_mid - row)
         for col in cols:
             result+=abs(col_mid - col)
-        return result 
+        return result
+        
+1086. High Five:
+class Solution:
+    def highFive(self, items: List[List[int]]) -> List[List[int]]:
+        scorelookup={}
+        res=[]
+        for i in items:
+            if i[0] in scorelookup:
+                scorelookup[i[0]].append(i[1])
+            else:
+                scorelookup[i[0]] = [i[1]]
+        for key in scorelookup:
+            topFiveScores = sorted(scorelookup[key])[-5:]
+            res.append([key,sum(topFiveScores)//5])
+        res.sort(key=lambda k:k[0]) 
+        return res
