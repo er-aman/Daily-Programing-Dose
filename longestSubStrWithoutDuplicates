@@ -2,19 +2,17 @@ def longestSubStrWithoutDuplicates(s):
   n=len(s)
   l,r=0,0
   res = float('-inf')
-  window = ''
+  window = set()
   while r<n:
     curChar = s[r]
     if curChar not in window:
-      window+=curChar
-      res= max(res,len(window))
+      window.add(curChar)
       r+=1
-    elif l==r:
-      l+=1
-      r+=1
+      res= max(res,r-l)
     else:
-      pos=window.index(curChar)
-      window=window[pos+1:]
+      window.remove(s[l])
       l+=1
   return res
 print(longestSubStrWithoutDuplicates('aaaaaahhhoooo'))
+
+O(n) and O(1)
